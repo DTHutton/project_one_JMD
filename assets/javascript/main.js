@@ -1,9 +1,19 @@
 $(document).ready(function () {
 
-    console.log("main.js test");
 
-    console.log(moment());
+    let characters = [];
 
-    $(".test2").text("jquery test")
+    let generateCharacters = function() {
+
+        for(let i = 0; i<10; i++) {
+            
+        }
+    }
+   
+
+
+
+
+
 
 });
