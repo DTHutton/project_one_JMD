@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
 
+
     let characters = [];
 
     let generateCharacters = function() {
