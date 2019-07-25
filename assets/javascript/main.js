@@ -1,38 +1,4 @@
-$(document).ready(function () {
-
-
-    let characters = [];
-    //this fills our characters array so we have 10 characters
-    function generateCharacters() {
-
-        for (let i = 0; i < 10; i++) {
-            characters.push({
-                name: "Character" + i,
-                hp: 50,
-                attack: 5
-            });
-        }
-        console.log(characters);
-    }
-
-
-
-    function generateCharacterButtons() {
-
-        for (let j = 0; j < 10; j++) {
-            let createCharacters = `
-        <h1>${characters[j]}</h1>
-        `
-            $("").append(createCharacters);
-        }
-
-    }
-    generateCharacters();
-    generateCharacterButtons();
-
-
-
-    //character portrait values generator
+ //character portrait values generator
     const charObj = {
         sassyChicken: "ftqLysT45BJMagKFuk",
         dramaCat: "ZyiSGjEVsLnB0SGkgN",
@@ -88,16 +54,14 @@ $(document).ready(function () {
                 $("#characterPortrait").append(charTemplate);
 
                 //taunt button changes it from still to animated, attack button changes it back to still
-                $("#taunt").on("click", function () {
+                $(".portrait").on("click", function () {
                     $(this).attr("src", $(this).attr("data-animate"));
                     $(this).attr("data-state", "animate");
-                    $(this).attr("data-id");
                 });
 
                 $("#attack").on("click", function () {
                     $(this).attr("src", $(this).attr("data-still"));
                     $(this).attr("data-state", "still");
-                    $(this).attr("data-id");
                 });
 
                 //taunt button changes it from still to animated, attack button changes it back to still
