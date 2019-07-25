@@ -80,3 +80,174 @@
 
 
 });
+
+//sets initial conditions
+let giphyChosen = false;
+let enemyChosen = false;
+let currentGiphy = false;
+let currentEnemy = false;
+
+let yourAttack;
+let yourHealth;
+let enemyAttack;
+let enemyHealth;
+let enemiesLeft = 3;
+
+//this will reset the values for the elements stats
+function reset() {
+
+    giphyChosen = false;
+    enemyChosen = false;
+    currentGiphy = false;
+    currentEnemy = false;
+    yourAttack="";
+    yourHealth="";
+    enemyAttack="";
+    enemyHealth="";
+    enemiesLeft = 3
+
+    $("#directions").empty();
+    $("#directions").text("Choose an element to battle with and prepare to face the rest of the elements");
+
+    generateCharacters();
+};
+
+function generateCharacters() {
+    for (i = 0; i<elements.length; i++) {
+        let template = `
+            <div class="col-3">
+                <img src="${elements[i].image}" class="img-thumbnail"
+                alt="${elements[i].name}" title="${elements[i].name}"
+                data-attack-power="${elements[i].attack}" 
+                data-counter-power="${elements[i].counter}" 
+                data-health-power="${elements[i].health}"
+                data-background="${elements[i].background}">
+            </div>
+        `
+        $("#character-display").append(template);
+    }
+
+    $(".img-thumbnail").on("click", function(){
+        if (elementChosen === false && enemyChosen === false) {
+            elementChosen = true;
+            currentElement = true;
+            yourAttack = $(this).attr("data-attack-power");
+            yourHealth = Math.floor(Math.random() * (400 - 250 + 1)) + 250;
+            console.log(yourAttack, yourHealth);
+            $("#chosen-character").append($(this));
+            $("#chosen-character").append("<p  id='your-health'>Health Power: " + yourHealth
+             + "</p><p id='your-attack'>Attack Power: " + yourAttack + "</p>");
+             $("#directions").text("Choose your first oppponent");
+             
+        }
+        else if (elementChosen === true && enemyChosen === false){
+            enemyChosen = true;
+            currentEnemy = true;
+            enemyAttack = $(this).attr("data-attack-power");
+            enemyHealth = $(this).attr("data-health-power");
+            console.log(enemyAttack, enemyHealth);
+            $("#chosen-enemy").append($(this));
+            $("#chosen-enemy").append("<p id='enemy-health'>Health Power: " + enemyHealth
+            + "</p><p id='their-attack'>Attack Power: " + enemyAttack + "</p>");
+            $("#directions").text("Its time to fight!");
+            $("#character-display").hide();
+            let background = $(this).attr("data-background");
+            $("#battleground").css("background-image", "url(" + background + ")");
+            
+            gamePlay();
+        }
+    })
+
+};
+
+
+
+generateCharacters();
+
+function gamePlay() {
+    if (enemiesLeft > 0 && enemyHealth > 0 && yourHealth > 0 ) {
+        let fightButtons = `
+            <button type="button" class="btn btn-primary" id="attack-button">Attack</button>
+            `
+        $("#game-buttons").append(fightButtons);
+
+        $("#attack-button").on("click", function() {
+            $("#directions").text("Destroy them")
+            
+                enemyHealth = enemyHealth - yourAttack;
+                console.log(enemyHealth);
+                $("#enemy-health").text("Enemy Health: " + enemyHealth);
+                yourHealth = yourHealth - enemyAttack;
+                $("#your-health").text("Your Health: " + yourHealth);
+            
+            if (enemyHealth <= 0 && yourHealth > 0 && enemiesLeft > 0) {
+                enemiesLeft--;
+                console.log("enemies left: " + enemiesLeft);
+                $("#your-health").text("Your Health: " + yourHealth);
+                $("#character-display").show();
+                $("#chosen-enemy").empty();
+                $("#game-buttons").empty();
+                enemyChosen = false;
+                currentEnemy= false;
+                nextRound();
+            }
+
+
+        });
+    }
+
+};
+
+function nextRound() {
+    if(enemiesLeft === 0 && yourHealth > 0 ) {
+        win();
+    }
+    else if(enemiesLeft > 0 && yourHealth <= 0) {
+        lose();
+    }
+    else {
+
+    
+    $("#directions").text("Choose your next oppponent");
+    $(".img-thumbnail").on("click", function() {
+        if (elementChosen === true && enemyChosen === false){
+            enemyChosen = true;
+            currentEnemy = true;
+            enemyAttack = $(this).attr("data-attack-power");
+            enemyHealth = $(this).attr("data-health-power");
+            console.log(enemyAttack, enemyHealth);
+            $("#chosen-enemy").append($(this));
+            $("#chosen-enemy").append("<p id='enemy-health'>Health Power: " + enemyHealth
+            + "</p><p id='their-attack'>Attack Power: " + enemyAttack + "</p>");
+            $("#directions").text("Its time to fight!");
+            $("#character-display").hide();
+            
+            gamePlay();
+        }
+    });
+}
+}
+function win() {
+    $("#directions").text("You Win!");
+    $("#chosen-character").empty();
+
+    let resetButton = `
+    <br>
+    <button type="button" class="btn btn-primary" id="reset-button">Play Again</button>
+    `
+    $("#directions").append(resetButton);
+    $("#reset-button").on("click", function() {
+        reset();
+    });
+}
+
+function lose() {
+    $("#directions").text("You Lose!");
+
+    let resetButton = `
+    <button type="button" class="btn btn-primary" id="reset-button">Play Again</button>
+    `
+    $("#reset-button").on("click", function() {
+        reset();
+    });
+}
