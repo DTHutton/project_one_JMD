@@ -86,33 +86,7 @@ $(document).ready(function () {
             `
 
                 $("#characterPortrait").append(charTemplate);
-
-                //taunt button changes it from still to animated, attack button changes it back to still
-                $("#taunt").on("click", function () {
-                    $(this).attr("src", $(this).attr("data-animate"));
-                    $(this).attr("data-state", "animate");
-                    $(this).attr("data-id");
-                });
-
-                $("#attack").on("click", function () {
-                    $(this).attr("src", $(this).attr("data-still"));
-                    $(this).attr("data-state", "still");
-                    $(this).attr("data-id");
-                });
-
-                //taunt button changes it from still to animated, attack button changes it back to still
-                // $("#taunt").on("click", function () {
-                //     $(".portrait").attr("src", $(".portrait").attr("data-animate"));
-                //     $(".portrait").attr("data-state", "animate");
-                // });
-
-                // $("#attack").on("click", function () {
-                //     $(".portrait").attr("src", $(".portrait").attr("data-still"));
-                //     $(".portrait").attr("data-state", "still");
-                // });
             }
         });
     }
-
-
 });
