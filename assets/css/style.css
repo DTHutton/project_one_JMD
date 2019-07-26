@@ -1,0 +1,16 @@
+.container {
+    background: url(../images/japan.jpg) center no-repeat;    
+    background-size: 1500px 800px;
+}
+
+body {
+    background: black;
+}
+
+p, h1 {
+    color: white;
+}
+
+.card-img-top {
+    width: auto;
+}
