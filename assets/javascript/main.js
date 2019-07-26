@@ -1,3 +1,4 @@
+ $(document).ready(function () {
  //character portrait values generator
     const charObj = {
         sassyChicken: "ftqLysT45BJMagKFuk",
