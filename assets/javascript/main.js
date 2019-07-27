@@ -125,14 +125,17 @@
                     $("#directions").text("Its time to fight!");
                     $("#characterPortrait").hide();
                     
-                    $(document).on("click", "#attack", function() {
- 
-                        gamePlay();
-                        
-                    });
+                 
                 }
+              
             });
     }
+
+    $(document).on("click", "#attack", function() {
+ 
+        gamePlay();
+        
+    });
 
  
     genCharacters();
@@ -165,22 +168,17 @@
 
 
         function gamePlay() {         
-            
-        
-            if (enemyHealth > 0 && enemiesLeft > 0 && yourHealth > 0 ) {
-               
                 $("#directions").text("Destroy them")
-                  
                 enemyHealth = enemyHealth - yourAttack;
                 console.log(enemyHealth);
                 $("#enemy-health").text("Enemy Health: " + enemyHealth);
                 yourHealth = yourHealth - enemyAttack;
                 $("#your-health").text("Your Health: " + yourHealth);
-        
-                
-            }
-            else if (enemyHealth <= 1 && yourHealth > 0 && enemiesLeft > 0) {
+            if (enemyHealth <= 0) {
                     enemiesLeft--;
+                    if(enemiesLeft === 0) {
+                        win();
+                    } else {
                     $("#chosen-enemy").empty();
                     console.log("enemies left: " + enemiesLeft);
                     $("#your-health").text("Your Health: " + yourHealth);
@@ -188,23 +186,17 @@
                     $("#you").hide();
                     $("#fight-buttons").hide();
                     enemyChosen = false;
-                    currentEnemy= false;
-                    
+                    currentEnemy= false;   
                     nextRound();
-            
-            
-                  
-                
+                    }
             }
         
         
         };
 
         function nextRound() {
-            if(enemiesLeft === 0) {
-                win();
-            }
-            else if(enemiesLeft > 0 && yourHealth < 0) {
+           
+            if(enemiesLeft > 0 && yourHealth <= 0) {
                 lose();
             }
             else {
@@ -219,6 +211,7 @@
                         currentEnemy = true;
                         enemyAttack = $(this).attr("data-attack-power");
                         enemyHealth = $(this).attr("data-health-power");
+                        console.log('the enemy health', enemyHealth);
                         console.log(enemyAttack, enemyHealth);
                         $("#chosen-enemy").append($(this));
                         $("#directions").text("Its time to fight!");
