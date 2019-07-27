@@ -1,0 +1,25 @@
+#myCanvas {
+    z-index: 1;
+    position: relative;
+    right: -60px;
+    top: -480px;
+    width: 1500; 
+    height: 800;
+}
+
+#chosen-character, #gameplay-buttons, #chosen-enemy {
+    position: relative;
+    z-index: 2;
+}
+
+body {
+    background: black;
+}
+
+p, h1 {
+    color: white;
+}
+
+.card-img-top {
+    width: auto;
+}

@@ -1,18 +1,5 @@
  $(document).ready(function () {
- //character portrait values generator
-    // const charObj = {
-    //     sassyChicken: "ftqLysT45BJMagKFuk",
-    //     dramaCat: "ZyiSGjEVsLnB0SGkgN",
-    //     creepachu: "U2nN0ridM4lXy",
-    //     trippingBilly: "7zF3biR7j50eQ",
-    //     meInMiddleSchool: "YPEpEDDFs7sEU"
-    // };
 
-    //const charApiArray = [charObj.sassyChicken, charObj.dramaCat, charObj.creepachu, charObj.trippingBilly, charObj.meInMiddleSchool]
-
-    //const charArray = ["Sassy Chicken", "Drama Cat", "Creepachu", "Tripping Billy", "Me in Middle School"];
-
-    //const btnThingy = [0, 1, 2, 3, 4, 5];
     let sassyChicken = {name: "Sassy Chicken", health: 90, attack: 15, image: "ftqLysT45BJMagKFuk"};
     let dramaCat = {name: "Drama Cat", health: 100, attack: 10, image: "ZyiSGjEVsLnB0SGkgN"};
     let creepachu = {name: "Creepachu", health: 110, attack: 15, image: "U2nN0ridM4lXy"};
@@ -36,12 +23,6 @@
     function genCharacters() {
 
             for (let k = 0; k < characters.length; k++) {
-                // let charName = charArray[k];
-                // let charApi = charApiArray[k];
-                // let btnThing = btnThingy[k];
-
-                // let hpVal = 50;
-                // let attVal = 50;
 
                 const giphyApiKey = "gAw2fynIwAANSTYnFxo7kHEYbOEsfAov";
 
@@ -71,28 +52,6 @@
                             `
 
                         $("#characterPortrait").append(charTemplate);
-
-                        //taunt button changes it from still to animated, attack button changes it back to still
-                        // $(".portrait").on("click", function () {
-                        //     $(this).attr("src", $(this).attr("data-animate"));
-                        //     $(this).attr("data-state", "animate");
-                        // });
-
-                        // $("#attack").on("click", function () {
-                        //     $(this).attr("src", $(this).attr("data-still"));
-                        //     $(this).attr("data-state", "still");
-                        // });
-
-                        //taunt button changes it from still to animated, attack button changes it back to still
-                        // $("#taunt").on("click", function () {
-                        //     $(".portrait").attr("src", $(".portrait").attr("data-animate"));
-                        //     $(".portrait").attr("data-state", "animate");
-                        // });
-
-                        // $("#attack").on("click", function () {
-                        //     $(".portrait").attr("src", $(".portrait").attr("data-still"));
-                        //     $(".portrait").attr("data-state", "still");
-                        // });
                     }
                 });
             }
@@ -108,8 +67,8 @@
                     $(this).find("ul").find("#show-health").attr("id", "your-health");
                     $("#your-health").text("Your Health: " + yourHealth);
                     $("#chosen-character").append($(this));
-                     $("#directions").text("Choose your first oppponent");
-                     $("#chosen-character").append("<div id ='fight-buttons'><button id='attack'>Attack Button</button><button id='taunt'>Taunt Button</button></div>");
+                     $("#directions").text("Choose your first opponent");
+                     $("#chosen-character").append("<div id ='fight-buttons'><button id='attack' class='btn btn-primary ml-1 mr-5 mt-1'>Attack Button</button><button id='taunt' class='btn btn-primary mt-1'>Taunt Button</button></div>");
                    
                      
                 }
@@ -124,6 +83,12 @@
                     $("#chosen-enemy").append($(this));
                     $("#directions").text("Its time to fight!");
                     $("#characterPortrait").hide();
+
+                    const loadCanvas = `
+                    <canvas id="myCanvas" width="1500" height="800"></canvas>
+                    `
+                    $("#combatZone").append(loadCanvas);
+                    backgroundAnimation();
                     
                  
                 }
@@ -249,6 +214,32 @@
                 reset();
             });
         }
+
+        backgroundAnimation = () => {
+
+            let image = new Image();
+            image.src = "assets/images/transport.jpg";
+            let canvas = document.getElementById("myCanvas");
+            let context = canvas.getContext("2d");
+            let row, imageWidth, imageHeight;
+    
+            image.onload = function () {
+                imageWidth = image.width;
+                imageHeight = image.height;
+                row = imageHeight;
+                requestAnimationFrame(animate);
+            };
+    
+            function animate() {
+                context.drawImage(image, 1, row, imageWidth, 1, 0, 0, imageWidth, row);
+                if (row > 0) row--;
+                requestAnimationFrame(animate);
+            }
+        }
+
+
+
+
 });
 
 
