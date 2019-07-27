@@ -104,17 +104,7 @@ $(document).ready(function () {
 
     }
 
-    annyang.addCommands(commands);
-    annyang.start();
 
-    // $(document).on("click", "#attack", function () {
-
-    //     gamePlay();
-
-    // });
-
-
-    // genCharacters();
     //this will reset the values for the elements stats
     reset = () => {
         sassyChicken = { name: "Sassy Chicken", health: 90, attack: 15, image: "ftqLysT45BJMagKFuk" };
@@ -248,7 +238,17 @@ $(document).ready(function () {
     }
 
 
-
+        if(annyang) {
+            var commands = {
+                "meme fight": genCharacters
+                
+            }
+        
+            annyang.addCommands(commands);
+            annyang.start({
+                autoRestart: true
+            });
+            }
 
 });
 
