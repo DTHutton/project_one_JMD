@@ -108,8 +108,8 @@
                     $(this).find("ul").find("#show-health").attr("id", "your-health");
                     $("#your-health").text("Your Health: " + yourHealth);
                     $("#chosen-character").append($(this));
-                     $("#directions").text("Choose your first oppponent");
-                     $("#chosen-character").append("<div id ='fight-buttons'><button id='attack'>Attack Button</button><button id='taunt'>Taunt Button</button></div>");
+                     $("#directions").text("Choose your first opponent");
+                     $("#chosen-character").append("<div id ='fight-buttons'><button id='attack' class='btn btn-primary ml-1 mr-5 mt-1'>Attack Button</button><button id='taunt' class='btn btn-primary mt-1'>Taunt Button</button></div>");
                    
                      
                 }
