@@ -23,6 +23,7 @@ $(document).ready(function () {
 
 
     genCharacters = () => {
+        annyang.pause();
 
         for (let k = 0; k < characters.length; k++) {
 
@@ -98,12 +99,6 @@ $(document).ready(function () {
             }
         });
     }
-
-    const commands = {
-        "hello": genCharacters
-
-    }
-
 
     //this will reset the values for the elements stats
     reset = () => {
