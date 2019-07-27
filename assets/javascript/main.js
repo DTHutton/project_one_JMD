@@ -1,18 +1,5 @@
  $(document).ready(function () {
- //character portrait values generator
-    // const charObj = {
-    //     sassyChicken: "ftqLysT45BJMagKFuk",
-    //     dramaCat: "ZyiSGjEVsLnB0SGkgN",
-    //     creepachu: "U2nN0ridM4lXy",
-    //     trippingBilly: "7zF3biR7j50eQ",
-    //     meInMiddleSchool: "YPEpEDDFs7sEU"
-    // };
 
-    //const charApiArray = [charObj.sassyChicken, charObj.dramaCat, charObj.creepachu, charObj.trippingBilly, charObj.meInMiddleSchool]
-
-    //const charArray = ["Sassy Chicken", "Drama Cat", "Creepachu", "Tripping Billy", "Me in Middle School"];
-
-    //const btnThingy = [0, 1, 2, 3, 4, 5];
     let sassyChicken = {name: "Sassy Chicken", health: 90, attack: 15, image: "ftqLysT45BJMagKFuk"};
     let dramaCat = {name: "Drama Cat", health: 100, attack: 10, image: "ZyiSGjEVsLnB0SGkgN"};
     let creepachu = {name: "Creepachu", health: 110, attack: 15, image: "U2nN0ridM4lXy"};
@@ -36,12 +23,6 @@
     function genCharacters() {
 
             for (let k = 0; k < characters.length; k++) {
-                // let charName = charArray[k];
-                // let charApi = charApiArray[k];
-                // let btnThing = btnThingy[k];
-
-                // let hpVal = 50;
-                // let attVal = 50;
 
                 const giphyApiKey = "gAw2fynIwAANSTYnFxo7kHEYbOEsfAov";
 
@@ -71,28 +52,6 @@
                             `
 
                         $("#characterPortrait").append(charTemplate);
-
-                        //taunt button changes it from still to animated, attack button changes it back to still
-                        // $(".portrait").on("click", function () {
-                        //     $(this).attr("src", $(this).attr("data-animate"));
-                        //     $(this).attr("data-state", "animate");
-                        // });
-
-                        // $("#attack").on("click", function () {
-                        //     $(this).attr("src", $(this).attr("data-still"));
-                        //     $(this).attr("data-state", "still");
-                        // });
-
-                        //taunt button changes it from still to animated, attack button changes it back to still
-                        // $("#taunt").on("click", function () {
-                        //     $(".portrait").attr("src", $(".portrait").attr("data-animate"));
-                        //     $(".portrait").attr("data-state", "animate");
-                        // });
-
-                        // $("#attack").on("click", function () {
-                        //     $(".portrait").attr("src", $(".portrait").attr("data-still"));
-                        //     $(".portrait").attr("data-state", "still");
-                        // });
                     }
                 });
             }
