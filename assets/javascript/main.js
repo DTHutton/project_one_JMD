@@ -20,7 +20,8 @@
     let enemiesLeft = 4;
     
 
-    function genCharacters() {
+    var genCharacters = function() {
+        annyang.pause();
 
             for (let k = 0; k < characters.length; k++) {
 
@@ -96,14 +97,14 @@
             });
     }
 
-    $(document).on("click", "#attack", function() {
+    // $(document).on("click", "#attack", function() {
  
-        gamePlay();
+    //     gamePlay();
         
-    });
+    // });
 
  
-    genCharacters();
+    //genCharacters();
     //this will reset the values for the elements stats
         function reset() {
             sassyChicken = {name: "Sassy Chicken", health: 90, attack: 15, image: "ftqLysT45BJMagKFuk"};
@@ -238,7 +239,17 @@
         }
 
 
-
+        if(annyang) {
+            var commands = {
+                "meme fight": genCharacters
+                
+            }
+        
+            annyang.addCommands(commands);
+            annyang.start({
+                autoRestart: true
+            });
+            }
 
 });
 
