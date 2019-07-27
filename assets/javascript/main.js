@@ -23,6 +23,7 @@ $(document).ready(function () {
 
 
     genCharacters = () => {
+        annyang.pause();
 
         for (let k = 0; k < characters.length; k++) {
 
