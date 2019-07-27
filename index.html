@@ -16,7 +16,7 @@
 
     <!-- Javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.js"></script>
     <script src="assets/javascript/main.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
     
@@ -28,13 +28,13 @@
 
 
         <div class="header">
-            <h1>Meme Fight</h1>
+            <h1 id="titleBanner">Meme Fight</h1>
             <p id="directions">Welcome to the Meme fight</p>
         </div>
 
         <div class="row">
             <div class="col-12">
-                <p>Character</p>
+                <p id="characterList">Characters</p>
                 <section class="row" id="characterPortrait"></section>
             </div>
         </div>
@@ -44,7 +44,7 @@
             
 
             <div class="col-4" id="chosen-character">
-                <p>Your Character</p>
+                <p id="yourCharacter">Your Character</p>
 
             </div>
 
@@ -53,7 +53,7 @@
             </div>
             
             <div class="col-4" id="chosen-enemy">
-                <p>Your Enemy</p>
+                <p id="yourEnemy">Your Enemy</p>
 
             </div>
 

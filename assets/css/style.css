@@ -1,10 +1,8 @@
 #myCanvas {
     z-index: 1;
     position: relative;
-    right: -60px;
-    top: -480px;
-    width: 1500; 
-    height: 800;
+    right: 185px;
+    top: -650px;
 }
 
 #chosen-character, #gameplay-buttons, #chosen-enemy {
