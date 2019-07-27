@@ -83,6 +83,12 @@
                     $("#chosen-enemy").append($(this));
                     $("#directions").text("Its time to fight!");
                     $("#characterPortrait").hide();
+
+                    const loadCanvas = `
+                    <canvas id="myCanvas" width="1500" height="800"></canvas>
+                    `
+                    $("#combatZone").append(loadCanvas);
+                    backgroundAnimation();
                     
                     $(document).on("click", "#attack", function() {
  
@@ -215,6 +221,32 @@
                 reset();
             });
         }
+
+        backgroundAnimation = () => {
+
+            let image = new Image();
+            image.src = "assets/images/transport.jpg";
+            let canvas = document.getElementById("myCanvas");
+            let context = canvas.getContext("2d");
+            let row, imageWidth, imageHeight;
+    
+            image.onload = function () {
+                imageWidth = image.width;
+                imageHeight = image.height;
+                row = imageHeight;
+                requestAnimationFrame(animate);
+            };
+    
+            function animate() {
+                context.drawImage(image, 1, row, imageWidth, 1, 0, 0, imageWidth, row);
+                if (row > 0) row--;
+                requestAnimationFrame(animate);
+            }
+        }
+
+
+
+
 });
 
 
