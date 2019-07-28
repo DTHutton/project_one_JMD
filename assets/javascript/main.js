@@ -109,9 +109,7 @@ $(document).ready(function () {
                 
             })
     
-        }
-
-            
+        }           
         
     
 
@@ -241,6 +239,7 @@ $(document).ready(function () {
             if (row > 0) row--;
             requestAnimationFrame(animate);
         }
+
     }
 
     gameCountdown = () => {
@@ -271,6 +270,7 @@ $(document).ready(function () {
         setTimeout(function () {
             $(".countdownTime").text("3");
         }, 5000);
+
 
         setTimeout(function () {
             $(".countdownTime").text("2");
