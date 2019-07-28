@@ -2,11 +2,11 @@ $(document).ready(function () {
 
 
 
-    let sassyChicken = { name: "Sassy Chicken", health: 90, attack: 15, image: "ftqLysT45BJMagKFuk" };
-    let dramaCat = { name: "Drama Cat", health: 100, attack: 10, image: "ZyiSGjEVsLnB0SGkgN" };
-    let creepachu = { name: "Creepachu", health: 110, attack: 15, image: "U2nN0ridM4lXy" };
-    let trippingBilly = { name: "Tripping Billy", health: 90, attack: 10, image: "7zF3biR7j50eQ" };
-    let meInMiddleSchool = { name: "Me in Middle School", health: 100, attack: 15, image: "YPEpEDDFs7sEU" };
+    let sassyChicken = { name: "Chicken", health: 90, attack: 80, image: "ftqLysT45BJMagKFuk" };
+    let dramaCat = { name: "Cat", health: 100, attack: 10, image: "ZyiSGjEVsLnB0SGkgN" };
+    let creepachu = { name: "Creeper", health: 110, attack: 15, image: "U2nN0ridM4lXy" };
+    let trippingBilly = { name: "Billy", health: 90, attack: 10, image: "7zF3biR7j50eQ" };
+    let meInMiddleSchool = { name: "School", health: 100, attack: 15, image: "YPEpEDDFs7sEU" };
 
     let characters = [sassyChicken, dramaCat, creepachu, trippingBilly, meInMiddleSchool];
 
@@ -21,9 +21,12 @@ $(document).ready(function () {
     let enemyHealth;
     let enemiesLeft = 4;
 
+    let userChoice;
+    let userChoice2;
+
 
     genCharacters = () => {
-        annyang.pause();
+        //annyang.pause();
 
         for (let k = 0; k < characters.length; k++) {
 
@@ -41,7 +44,7 @@ $(document).ready(function () {
                     let animateUrl = results.images.fixed_height.url;
 
                     let charTemplate = `
-                            <div class="card m-1 ${characters[k].name}" style="width: 18rem;" data-attack-power="${characters[k].attack}" data-health-power="${characters[k].health}">
+                            <div class="card m-1" id="${characters[k].name}" style="width: 18rem;" data-attack-power="${characters[k].attack}" data-health-power="${characters[k].health}">
                                 <img src="${stillUrl}" class="card-img-top portrait" data-animate="${animateUrl}" data-still="${stillUrl}" data-id="${characters[k].name}" 
                                     data-state="still" alt="placeholder">
                                 <div class="card-body">
@@ -58,61 +61,67 @@ $(document).ready(function () {
                 }
             });
         }
-
-
-
-
-        // chooseYourCharacter = () => {
-        $(document).on("click", ".card", function () {
-
-            if (giphyChosen === false && enemyChosen === false) {
-                giphyChosen = true;
-                currentGiphy = true;
-                $(this).attr("id", "you");
-                yourAttack = $(this).attr("data-attack-power");
-                yourHealth = Math.floor(Math.random() * (500 - 400 + 1)) + 400;
-                console.log(yourAttack, yourHealth);
-                $(this).find("ul").find("#show-health").attr("id", "your-health");
-                $("#your-health").text("Your Health: " + yourHealth);
-                $("#chosen-character").append($(this));
-                $("#directions").text("Choose your first opponent");
-            } else if (giphyChosen === true && enemyChosen === false) {
-                enemyChosen = true;
-                currentEnemy = true;
-                enemyAttack = $(this).attr("data-attack-power");
-                enemyHealth = $(this).attr("data-health-power");
-                console.log(enemyAttack, enemyHealth);
-                $(this).find("ul").find("#show-health").attr("id", "enemy-health");
-                $("#enemy-health").text("Enemy Health: " + enemyHealth);
-                $("#chosen-enemy").append($(this));
-                $("#directions").text("Its time to fight!");
-                $("#characterPortrait").hide();
-
-                const loadCanvas = `
-                    <canvas id="myCanvas" width="1500" height="800"></canvas>
-                    `
-                $("#combatZone").append(loadCanvas);
-                backgroundAnimation();
-            }
-        });
     }
+        characterCheck = () => {
 
-    chooseSassyChicken = () => {
+            annyang.addCallback('resultMatch', function(userSaid, commandText, phrases){
+                for (i = 0; i < characters.length; i++) {
+                    if ((userSaid.toLowerCase()).localeCompare((characters[i].name).toLowerCase()) === 0) {
+                        console.log("user said: " + userSaid);
+                        console.log("character name: " + characters[i].name);
+                        userChoice = characters[i].name;
+                    }
+                }
 
-        if ($(".portrait").attr("data-id") === "Sassy Chicken") {
-            console.log("bleh");
-            $(".sassyChicken").trigger("click");
+                if (giphyChosen === false && enemyChosen === false) {
+                    giphyChosen = true;
+                    currentGiphy = true;
+                    console.log(userChoice);
+                    $("#"+userChoice).attr("id", "you");
+                    yourAttack = $("#you").attr("data-attack-power");
+                    yourHealth = Math.floor(Math.random() * (500 - 400 + 1)) + 400;
+                    console.log(yourAttack, yourHealth);
+                    $("#you").find("ul").find("#show-health").attr("id", "your-health");
+                    $("#your-health").text("Your Health: " + yourHealth);
+                    $("#chosen-character").append($("#you"));
+                    $("#directions").text("Choose your first opponent");
+                }
+                 else if (giphyChosen === true && enemyChosen === false) {
+                    enemyChosen = true;
+                    currentEnemy = true;
+                    enemyAttack = $("#"+userChoice).attr("data-attack-power");
+                    enemyHealth = $("#"+userChoice).attr("data-health-power");
+                    console.log(enemyAttack, enemyHealth);
+                    $("#"+userChoice).find("ul").find("#show-health").attr("id", "enemy-health");
+                    $("#enemy-health").text("Enemy Health: " + enemyHealth);
+                    $("#chosen-enemy").append($("#"+userChoice));
+                    $("#directions").text("Its time to fight!");
+                    //$("#characterPortrait").hide();
+                    //annyang.resume();
+                    const loadCanvas = `
+                        <canvas id="myCanvas" width="1500" height="800"></canvas>
+                        `
+                    $("#combatZone").append(loadCanvas);
+                    //backgroundAnimation();
+                }
+            
+                
+            })
+    
         }
 
-    }
+            
+        
+    
 
     //this will reset the game
     reset = () => {
-        sassyChicken = { name: "Sassy Chicken", health: 90, attack: 15, image: "ftqLysT45BJMagKFuk" };
-        dramaCat = { name: "Drama Cat", health: 100, attack: 10, image: "ZyiSGjEVsLnB0SGkgN" };
-        creepachu = { name: "Creepachu", health: 110, attack: 15, image: "U2nN0ridM4lXy" };
-        trippingBilly = { name: "Tripping Billy", health: 90, attack: 10, image: "7zF3biR7j50eQ" };
-        meInMiddleSchool = { name: "Me in Middle School", health: 100, attack: 15, image: "YPEpEDDFs7sEU" };
+        console.log("reset the game");
+        sassyChicken = { name: "Chicken", health: 90, attack: 15, image: "ftqLysT45BJMagKFuk" };
+        dramaCat = { name: "Cat", health: 100, attack: 10, image: "ZyiSGjEVsLnB0SGkgN" };
+        creepachu = { name: "Creeper", health: 110, attack: 15, image: "U2nN0ridM4lXy" };
+        trippingBilly = { name: "Billy", health: 90, attack: 10, image: "7zF3biR7j50eQ" };
+        meInMiddleSchool = { name: "School", health: 100, attack: 15, image: "YPEpEDDFs7sEU" };
 
         characters = [sassyChicken, dramaCat, creepachu, trippingBilly, meInMiddleSchool];
 
@@ -126,32 +135,38 @@ $(document).ready(function () {
         enemyHealth = "";
         enemiesLeft = 4;
 
-        $("#directions").empty();
+        userChoice="";
+        userChoice2="";
 
-        genCharacters();
+        $("#directions").text("Say 'let me play the damn game' to play again");
+
+        
     };
 
     gamePlay = () => {
         $("#directions").text("Destroy them")
         enemyHealth = enemyHealth - yourAttack;
-        console.log(enemyHealth);
+        console.log("enemy health:" + enemyHealth);
         $("#enemy-health").text("Enemy Health: " + enemyHealth);
         yourHealth = yourHealth - enemyAttack;
         $("#your-health").text("Your Health: " + yourHealth);
         if (enemyHealth <= 0) {
             enemiesLeft--;
             if (enemiesLeft === 0) {
-                win();
+                $("#directions").text("You Win! Say reset to play again");
+                $("#chosen-character").empty();
+                $("#chosen-enemy").empty();
             } else {
                 $("#chosen-enemy").empty();
                 console.log("enemies left: " + enemiesLeft);
                 $("#your-health").text("Your Health: " + yourHealth);
-                $("#characterPortrait").show();
-                $("#you").hide();
-                $("#fight-buttons").hide();
+                // $("#myCanvas").hide();
+                // $("#characterPortrait").show();
+                // $("#you").hide();
                 enemyChosen = false;
                 currentEnemy = false;
-                nextRound();
+                annyang.remove(commands);
+                annyang.addCommands(commands2);
             }
         }
 
@@ -160,60 +175,53 @@ $(document).ready(function () {
 
     nextRound = () => {
 
+
         if (enemiesLeft > 0 && yourHealth <= 0) {
-            lose();
+            $("#directions").text("You Lose! Say reset to play again");
+
         }
         else {
 
             $("#directions").text("Choose your next oppponent");
-            $(document).on("click", ".card", function () {
-                $("#you").show();
-                $("#fight-buttons").show();
+            
+            annyang.addCallback('resultMatch', function(userSaid, commandText, phrases){
+                for (j = 0; j < characters.length; j++) {
+                    if ((userSaid.toLowerCase()).localeCompare((characters[i].name).toLowerCase()) === 0) {
+                        console.log("user said: " + userSaid);
+                        console.log("character name: " + characters[j].name);
+                        userChoice2 = characters[j].name;
+                    }
+                }
+            //     if (giphyChosen === true && enemyChosen === false) {
+            //         enemyChosen = true;
+            //         currentEnemy = true;
+            //         enemyAttack = $(this).attr("data-attack-power");
+            //         enemyHealth = $(this).attr("data-health-power");
+            //         console.log('the enemy health', enemyHealth);
+            //         console.log(enemyAttack, enemyHealth);
+            //         $("#chosen-enemy").append($(this));
+            //         $("#directions").text("Its time to fight!");
+            //         $("#characterPortrait").hide();
+
+            //     }
                 if (giphyChosen === true && enemyChosen === false) {
                     enemyChosen = true;
                     currentEnemy = true;
-                    enemyAttack = $(this).attr("data-attack-power");
-                    enemyHealth = $(this).attr("data-health-power");
-                    console.log('the enemy health', enemyHealth);
+                    enemyAttack = $("#"+userChoice2).attr("data-attack-power");
+                    enemyHealth = $("#"+userChoice2).attr("data-health-power");
                     console.log(enemyAttack, enemyHealth);
-                    $("#chosen-enemy").append($(this));
+                    $("#"+userChoice2).find("ul").find("#show-health").attr("id", "enemy-health");
+                    $("#enemy-health").text("Enemy Health: " + enemyHealth);
+                    $("#chosen-enemy").append($("#"+userChoice2));
                     $("#directions").text("Its time to fight!");
-                    $("#characterPortrait").hide();
-
-                    gamePlay();
                 }
+             })
 
-            });
         }
-    }
-    win = () => {
-        $("#directions").text("You Win!");
-        $("#chosen-character").empty();
-
-        let resetButton = `
-            <br>
-            <button type="button" class="btn btn-primary" id="reset-button">Play Again</button>
-            `
-        $("#directions").append(resetButton);
-        $(document).on("click", "#reset-button", function () {
-            reset();
-        });
-    }
-
-    lose = () => {
-        $("#directions").text("You Lose!");
-
-        let resetButton = `
-            <button type="button" class="btn btn-primary" id="reset-button">Play Again</button>
-            `
-        $("#directions").append(resetButton);
-        $(document).on("click", "#reset-button", function () {
-            reset();
-        });
     }
 
     backgroundAnimation = () => {
-
+        
         let image = new Image();
         image.src = "assets/images/transport.jpg";
         let canvas = document.getElementById("myCanvas");
@@ -239,8 +247,22 @@ $(document).ready(function () {
         let commands = {
             "let me play the damn game": genCharacters,
             "attack": gamePlay,
-            "do the thing": chooseSassyChicken
+            "chicken": characterCheck,
+            "cat": characterCheck,
+            "creeper": characterCheck,
+            "billy": characterCheck,
+            "school": characterCheck,
+            "reset": reset
 
+        }
+        let commands2 = {
+            "attack": gamePlay,
+            "chicken": characterCheck,
+            "cat": characterCheck,
+            "creeper": characterCheck,
+            "billy": characterCheck,
+            "school": characterCheck,
+            "reset": reset
         }
 
         annyang.addCommands(commands);
