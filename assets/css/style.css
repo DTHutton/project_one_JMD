@@ -10,6 +10,25 @@
     z-index: 2;
 }
 
+.ready, .fight, .countdownTime {
+    color: white;
+    font-size: 100px;
+    font-weight: bold;
+    position: relative;
+    font-family: 'Bangers', cursive;
+}
+
+.ready, .fight {
+    right: 20px;
+    top: 135px;
+}
+
+.countdownTime {
+    right: 60px;
+    top: 140px;
+    text-align: center;
+}
+
 body {
     background: black;
 }
