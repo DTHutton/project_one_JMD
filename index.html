@@ -6,61 +6,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Project One</title>
+    <title>Meme Fight</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/normalize.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- Javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.js"></script>
     <script src="assets/javascript/main.js"></script>
-    
 
 </head>
 
 <body>
-    <main class="container">
 
+    <main class="container">
 
         <div class="header">
             <h1 id="titleBanner">Meme Fight</h1>
             <p id="directions">Welcome to the Meme fight</p>
         </div>
 
-        <div class="row">
+        <section class="row characterDisplay">
             <div class="col-12">
                 <p id="characterList">Characters</p>
-                <section class="row" id="characterPortrait"></section>
+                <div class="row" id="characterPortrait"></div>
             </div>
-        </div>
+        </section>
+
         <br>
+
         <br>
-        <div class="row" id="combatZone">
-            
+
+        <section class="row" id="combatZone">
 
             <div class="col-4" id="chosen-character">
                 <p id="yourCharacter">Your Character</p>
-
             </div>
 
-            <div class="col-4" id="gameplay-buttons">
+            <div class="col-4" id="gameplay-buttons"></div>
 
-            </div>
-            
             <div class="col-4" id="chosen-enemy">
                 <p id="yourEnemy">Your Enemy</p>
-
             </div>
 
-        </div>
-
+        </section>
 
     </main>
-    </section>
+
 </body>
 
 </html>
