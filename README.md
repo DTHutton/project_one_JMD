@@ -1,7 +1,7 @@
 # project_one_JMD
 ## Memetastic, voice controlled fighting game!
    * Choose your character!
-   * Take down your enemys!
+   * Take down your enemies!
    * Yell at your computer in the process!
 
    "Meme Fight" Game
@@ -20,4 +20,4 @@
    User need choose one of character and one enemy character to start the game.
    Also user can choose characters using voice command in the game.
    Every character have image , health and attack varables that change during the game.
-   When all your enemies defeted game over.
+   When all your enemies defeated game over.
