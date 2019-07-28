@@ -61,6 +61,7 @@ $(document).ready(function () {
                 }
             });
         }
+
     }
         characterCheck = () => {
 
@@ -242,7 +243,61 @@ $(document).ready(function () {
         }
     }
 
+    gameCountdown = () => {
 
+        const countReady = `
+        <aside class="ready">
+        Ready?!
+        </aside>
+        `
+        const countdownTimer = `
+        <aside class="countdownTime"></aside>
+        `
+
+        setTimeout(function () {
+            $("#gameplay-buttons").append(countReady);
+        }, 10);
+
+        setTimeout(function () {
+            $(".ready").text("");
+            $("#gameplay-buttons").append(countdownTimer);
+            $(".countdownTime").text("5");
+        }, 3000);
+
+        setTimeout(function () {
+            $(".countdownTime").text("4");
+        }, 4000);
+
+        setTimeout(function () {
+            $(".countdownTime").text("3");
+        }, 5000);
+
+        setTimeout(function () {
+            $(".countdownTime").text("2");
+        }, 6000);
+
+        setTimeout(function () {
+            $(".countdownTime").text("1");
+        }, 7000);
+        setTimeout(function () {
+            $(".countdownTime").text("");
+            $(".ready").text("Fight!");
+        }, 8000);
+
+        setTimeout(function () {
+            $(".ready").text("Fight!!");
+        }, 9000);
+
+        setTimeout(function () {
+            $(".ready").text("Fight!!!");
+        }, 10000);
+
+        setTimeout(function () {
+            $(".ready").text("");
+        }, 12000);
+    }
+
+    //Annyang code
     if (annyang) {
         let commands = {
             "let me play the damn game": genCharacters,
