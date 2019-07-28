@@ -102,7 +102,6 @@ $(document).ready(function () {
         if ($(".portrait").attr("data-id") === "Sassy Chicken") {
             console.log("bleh");
             $(".sassyChicken").trigger("click");
-            // chooseYourCharacter();
         }
 
     }
