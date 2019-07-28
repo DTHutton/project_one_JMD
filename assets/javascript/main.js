@@ -41,11 +41,11 @@ $(document).ready(function () {
                     let animateUrl = results.images.fixed_height.url;
 
                     let charTemplate = `
-                            <div class="card m-1" style="width: 18rem;" data-attack-power="${characters[k].attack}" data-health-power="${characters[k].health}">
-                                <img src="${stillUrl}" class="card-img-top portrait" data-animate="${animateUrl}" data-still="${stillUrl}" 
+                            <div class="card m-1 ${characters[k].name}" style="width: 18rem;" data-attack-power="${characters[k].attack}" data-health-power="${characters[k].health}">
+                                <img src="${stillUrl}" class="card-img-top portrait" data-animate="${animateUrl}" data-still="${stillUrl}" data-id="${characters[k].name}" 
                                     data-state="still" alt="placeholder">
                                 <div class="card-body">
-                                    <h5 class="card-title">Character Name: ${characters[k].name}</h5>
+                                    <h5 class="card-title">${characters[k].name}</h5>
                                 </div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item" id="show-health">HP: ${characters[k].health}</li>
@@ -59,6 +59,10 @@ $(document).ready(function () {
             });
         }
 
+
+
+
+        // chooseYourCharacter = () => {
         $(document).on("click", ".card", function () {
 
             if (giphyChosen === false && enemyChosen === false) {
@@ -72,13 +76,6 @@ $(document).ready(function () {
                 $("#your-health").text("Your Health: " + yourHealth);
                 $("#chosen-character").append($(this));
                 $("#directions").text("Choose your first opponent");
-                const buttonAppendTemplate = `
-                <div id ='fight-buttons'>
-                    <button id='attack' class='btn btn-primary ml-1 mr-5 mt-1'>Attack Button</button>
-                    <button id='taunt' class='btn btn-primary mt-1'>Taunt Button</button>
-                </div>
-                `
-                $("#chosen-character").append(buttonAppendTemplate);
             } else if (giphyChosen === true && enemyChosen === false) {
                 enemyChosen = true;
                 currentEnemy = true;
@@ -100,7 +97,17 @@ $(document).ready(function () {
         });
     }
 
-    //this will reset the values for the elements stats
+    chooseSassyChicken = () => {
+
+        if ($(".portrait").attr("data-id") === "Sassy Chicken") {
+            console.log("bleh");
+            $(".sassyChicken").trigger("click");
+            // chooseYourCharacter();
+        }
+
+    }
+
+    //this will reset the game
     reset = () => {
         sassyChicken = { name: "Sassy Chicken", health: 90, attack: 15, image: "ftqLysT45BJMagKFuk" };
         dramaCat = { name: "Drama Cat", health: 100, attack: 10, image: "ZyiSGjEVsLnB0SGkgN" };
@@ -124,8 +131,6 @@ $(document).ready(function () {
 
         genCharacters();
     };
-
-
 
     gamePlay = () => {
         $("#directions").text("Destroy them")
@@ -161,7 +166,6 @@ $(document).ready(function () {
         }
         else {
 
-
             $("#directions").text("Choose your next oppponent");
             $(document).on("click", ".card", function () {
                 $("#you").show();
@@ -179,7 +183,6 @@ $(document).ready(function () {
 
                     gamePlay();
                 }
-
 
             });
         }
@@ -233,17 +236,19 @@ $(document).ready(function () {
     }
 
 
-        if(annyang) {
-            var commands = {
-                "meme fight": genCharacters
-                
-            }
-        
-            annyang.addCommands(commands);
-            annyang.start({
-                autoRestart: true
-            });
-            }
+    if (annyang) {
+        let commands = {
+            "let me play the damn game": genCharacters,
+            "attack": gamePlay,
+            "do the thing": chooseSassyChicken
+
+        }
+
+        annyang.addCommands(commands);
+        annyang.start({
+            autoRestart: true
+        });
+    }
 
 });
 
