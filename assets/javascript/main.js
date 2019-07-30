@@ -6,9 +6,10 @@ $(document).ready(function () {
     let dramaCat = { name: "Cat", health: 100, attack: 10, image: "ZyiSGjEVsLnB0SGkgN" };
     let creepachu = { name: "Creeper", health: 110, attack: 15, image: "U2nN0ridM4lXy" };
     let trippingBilly = { name: "Billy", health: 90, attack: 10, image: "7zF3biR7j50eQ" };
-    let meInMiddleSchool = { name: "School", health: 100, attack: 15, image: "YPEpEDDFs7sEU" };
+    // let meInMiddleSchool = { name: "School", health: 100, attack: 15, image: "YPEpEDDFs7sEU" };
 
-    let characters = [sassyChicken, dramaCat, creepachu, trippingBilly, meInMiddleSchool];
+    let characters = [sassyChicken, dramaCat, creepachu, trippingBilly];
+    // meInMiddleSchool
 
     let giphyChosen = false;
     let enemyChosen = false;
