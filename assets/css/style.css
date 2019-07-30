@@ -10,12 +10,20 @@
     z-index: 2;
 }
 
+.ready, .fight, .countdownTime, .titleBanner, #directions, .customFont, #gameplay-buttons {
+    font-family: 'Bangers', cursive;
+    color: whitesmoke;
+}
+
+.character-font {
+    font-family: 'Bangers', cursive;
+    color: black;
+}
+
 .ready, .fight, .countdownTime {
-    color: white;
     font-size: 100px;
     font-weight: bold;
     position: relative;
-    font-family: 'Bangers', cursive;
 }
 
 .ready, .fight {

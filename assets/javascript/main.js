@@ -6,9 +6,10 @@ $(document).ready(function () {
     let dramaCat = { name: "Cat", health: 100, attack: 10, image: "ZyiSGjEVsLnB0SGkgN" };
     let creepachu = { name: "Creeper", health: 110, attack: 15, image: "U2nN0ridM4lXy" };
     let trippingBilly = { name: "Billy", health: 90, attack: 10, image: "7zF3biR7j50eQ" };
-    let meInMiddleSchool = { name: "School", health: 100, attack: 15, image: "YPEpEDDFs7sEU" };
+    // let meInMiddleSchool = { name: "School", health: 100, attack: 15, image: "YPEpEDDFs7sEU" };
 
-    let characters = [sassyChicken, dramaCat, creepachu, trippingBilly, meInMiddleSchool];
+    let characters = [sassyChicken, dramaCat, creepachu, trippingBilly];
+    // meInMiddleSchool
 
     let giphyChosen = false;
     let enemyChosen = false;
@@ -47,15 +48,17 @@ $(document).ready(function () {
                     let charTemplate = `
                             <div class="card m-1" id="${characters[k].name}" style="width: 18rem;" data-attack-power="${characters[k].attack}" data-health-power="${characters[k].health}">
                                 <img src="${animateUrl}" class="card-img-top portrait" data-animate="${animateUrl}" data-still="${stillUrl}" data-id="${characters[k].name}" 
+
                                     data-state="still" alt="placeholder">
                                 <div class="card-body">
-                                    <h5 class="card-title">${characters[k].name}</h5>
+                                    <h5 class="card-title text-center character-font">${characters[k].name}</h5>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item" id="show-health">HP: ${characters[k].health}</li>
-                                    <li class="list-group-item" id="show-attack">Attack: ${characters[k].attack}</li>
+                                    <li class="list-group-item character-font" id="show-health">HP: ${characters[k].health}</li>
+                                    <li class="list-group-item character-font" id="show-attack">Attack: ${characters[k].attack}</li>
                                 </ul>
                             </div>
+                        </section>    
                             `
 
                     $("#characterPortrait").append(charTemplate);
@@ -114,9 +117,7 @@ $(document).ready(function () {
                 
             })
     
-        }
-
-            
+        }           
         
     
 
@@ -206,6 +207,7 @@ $(document).ready(function () {
             if (row > 0) row--;
             requestAnimationFrame(animate);
         }
+
     }
 
     gameCountdown = () => {
@@ -236,6 +238,7 @@ $(document).ready(function () {
         setTimeout(function () {
             $(".countdownTime").text("3");
         }, 5000);
+
 
         setTimeout(function () {
             $(".countdownTime").text("2");
